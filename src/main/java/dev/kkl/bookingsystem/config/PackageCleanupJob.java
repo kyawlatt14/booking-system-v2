@@ -16,8 +16,6 @@ public class PackageCleanupJob {
     @Autowired
     private UserPackageRepository userPackageRepository;
 
-    String ster = "2023-10-01T00:00:00";
-
     @Scheduled(cron = "*/10 * * * * ?")
     public void cleanExpiredPackages() {
         LocalDateTime now = LocalDateTime.now();
