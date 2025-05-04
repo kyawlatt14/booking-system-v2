@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: booking-system
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booking # PostgreSQL JDBC URL
+    username: postgres              # Your PostgreSQL username
+    password: kkl@14994              # Your PostgreSQL password
+    driver-class-name: org.postgresql.Driver        # PostgreSQL Driver class
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  sql:
+    init:
+      mode: always
+  main:
+    allow-circular-references: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+#jwt:
+#  secret: verysecretkey123456
+#  expiration: 86400000
+
+server:
+  port: 8080
