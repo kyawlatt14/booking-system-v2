@@ -4,6 +4,7 @@ import dev.kkl.bookingsystem.dto.BookingRequest;
 import dev.kkl.bookingsystem.entity.Booking;
 import dev.kkl.bookingsystem.entity.User;
 import dev.kkl.bookingsystem.entity.UserPackage;
+import dev.kkl.bookingsystem.exception.ApplicationErrorException;
 import dev.kkl.bookingsystem.repository.BookingRepository;
 import dev.kkl.bookingsystem.repository.UserPackageRepository;
 import dev.kkl.bookingsystem.repository.UserRepository;
@@ -23,13 +24,13 @@ public class BookingService {
 
     public void bookClass(String email, BookingRequest request) {
         User user = userRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ApplicationErrorException("User not found"));
 
         // Find a valid package with credits
         UserPackage userPkg = userPackageRepo.findByUserId(user.getId()).stream()
                 .filter(pkg -> pkg.getRemainingCredits() > 0 && pkg.getExpiryDate().isAfter(LocalDateTime.now()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("No active package with credits"));
+                .orElseThrow(() -> new ApplicationErrorException("No active package with credits"));
 
         // Deduct credit
         userPkg.setRemainingCredits(userPkg.getRemainingCredits() - 1);
@@ -46,7 +47,7 @@ public class BookingService {
 
     public List<Booking> getUserBookings(String email) {
         User user = userRepo.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ApplicationErrorException("User not found"));
         return bookingRepo.findByUserIdOrderByClassDateAsc(user.getId());
     }
 }

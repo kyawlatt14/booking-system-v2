@@ -4,6 +4,7 @@ import dev.kkl.bookingsystem.dto.PurchasePackageRequest;
 import dev.kkl.bookingsystem.entity.User;
 import dev.kkl.bookingsystem.entity.Package;
 import dev.kkl.bookingsystem.entity.UserPackage;
+import dev.kkl.bookingsystem.exception.ApplicationErrorException;
 import dev.kkl.bookingsystem.repository.PackageRepository;
 import dev.kkl.bookingsystem.repository.UserPackageRepository;
 import dev.kkl.bookingsystem.repository.UserRepository;
@@ -20,6 +21,7 @@ public class PackageService {
     private final PackageRepository packageRepo;
     private final UserPackageRepository userPackageRepo;
     private final UserRepository userRepo;
+    private final MockService mockService;
 
     public List<Package> listByCountry(String country) {
         return packageRepo.findByCountry(country);
@@ -27,12 +29,12 @@ public class PackageService {
 
     public void purchasePackage(String userEmail, PurchasePackageRequest request) {
         User user = userRepo.findByEmail(userEmail)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ApplicationErrorException("User not found"));
         Package pkg = packageRepo.findById(request.getPackageId())
-                .orElseThrow(() -> new RuntimeException("Package not found"));
+                .orElseThrow(() -> new ApplicationErrorException("Package not found"));
 
         // mock payment
-        System.out.println("Charging $" + pkg.getPrice() + " to " + user.getEmail());
+        mockService.payment(pkg.getPrice(),user.getEmail());
 
         UserPackage up = new UserPackage();
         up.setUser(user);

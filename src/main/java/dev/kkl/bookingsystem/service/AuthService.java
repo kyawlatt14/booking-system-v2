@@ -4,6 +4,7 @@ import dev.kkl.bookingsystem.config.JwtTokenProvider;
 import dev.kkl.bookingsystem.dto.LoginRequest;
 import dev.kkl.bookingsystem.dto.RegisterRequest;
 import dev.kkl.bookingsystem.entity.User;
+import dev.kkl.bookingsystem.exception.ApplicationErrorException;
 import dev.kkl.bookingsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,10 +21,11 @@ public class AuthService {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtProvider;
+    private final MockService mockService;
 
     public void register(RegisterRequest request) {
         if (userRepo.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new ApplicationErrorException("Email already exists");
         }
 
         User user = new User();
@@ -37,15 +39,15 @@ public class AuthService {
         userRepo.save(user);
 
         // mock email verification
-        System.out.println("Verification email sent to " + user.getEmail());
+        mockService.verificationForEmail(request.getEmail());
     }
 
     public String login(LoginRequest request) {
         User user = userRepo.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                .orElseThrow(() -> new ApplicationErrorException("Invalid credentials"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+            throw new ApplicationErrorException("Invalid credentials");
         }
 
         return jwtProvider.generateToken(
