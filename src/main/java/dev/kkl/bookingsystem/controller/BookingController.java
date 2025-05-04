@@ -1,6 +1,8 @@
 package dev.kkl.bookingsystem.controller;
 
+import dev.kkl.bookingsystem.dto.AppResponse;
 import dev.kkl.bookingsystem.dto.BookingRequest;
+import dev.kkl.bookingsystem.dto.ClassScheduleCreateRequest;
 import dev.kkl.bookingsystem.entity.Booking;
 import dev.kkl.bookingsystem.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +19,24 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-    @PostMapping("/book")
-    public ResponseEntity<?> book(@RequestBody BookingRequest request, Principal principal) {
-        bookingService.bookClass(principal.getName(), request);
-        return ResponseEntity.ok("Class booked!");
+    @PostMapping("/classSchedule/create")
+    public ResponseEntity<AppResponse> createClassSchedule(@RequestBody ClassScheduleCreateRequest request) {
+        AppResponse response = bookingService.createClassSchedule(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/book/{classScheduleId}")
+    public ResponseEntity<AppResponse> bookClass(@PathVariable Long classScheduleId,
+                                                 Principal principal) {
+        AppResponse response = bookingService.bookClass(classScheduleId, principal.getName());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/cancel/{classScheduleId}")
+    public ResponseEntity<AppResponse> cancelBooking(@PathVariable Long classScheduleId,
+                                                     Principal principal) {
+        AppResponse response = bookingService.cancelBooking(classScheduleId, principal.getName());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/my")

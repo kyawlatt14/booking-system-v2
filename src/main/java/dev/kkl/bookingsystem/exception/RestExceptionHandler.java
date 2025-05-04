@@ -21,6 +21,4 @@ public class RestExceptionHandler {
         }
         return AppResponse.fail(msg);
     }
-
-
 }

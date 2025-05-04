@@ -8,17 +8,16 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bookings")
+@Table(name = "waitlists")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Booking {
-
+public class Waitlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -26,13 +25,8 @@ public class Booking {
     @JoinColumn(name = "class_schedule_id")
     private ClassSchedule classSchedule;
 
-    private String status;  // "BOOKED", "CANCELED", etc.
+    private LocalDateTime addedToWaitlistTime;
 
-    private String className;
-    private LocalDateTime classDate;
-
-    private LocalDateTime bookedTime;
-
-    private LocalDateTime bookedAt;
+    // Getters and Setters
 }
 

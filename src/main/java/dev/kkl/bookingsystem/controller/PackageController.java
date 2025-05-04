@@ -1,5 +1,6 @@
 package dev.kkl.bookingsystem.controller;
 
+import dev.kkl.bookingsystem.dto.PackageDTO;
 import dev.kkl.bookingsystem.dto.PurchasePackageRequest;
 import dev.kkl.bookingsystem.entity.UserPackage;
 import dev.kkl.bookingsystem.service.PackageService;
@@ -18,6 +19,17 @@ import java.util.List;
 public class PackageController {
 
     private final PackageService packageService;
+
+    @GetMapping
+    public List<Package> getAll() {
+        return packageService.getAll();
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createPackage(@RequestBody PackageDTO packageDTO){
+        packageService.createPackage(packageDTO);
+        return ResponseEntity.ok("Successfully created!");
+    }
 
     @GetMapping("/country/{country}")
     public List<Package> getByCountry(@PathVariable String country) {

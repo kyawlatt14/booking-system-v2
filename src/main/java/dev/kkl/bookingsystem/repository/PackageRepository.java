@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PackageRepository extends JpaRepository<Package, Long> {
     List<Package> findByCountry(String country);
+    boolean existsByTitle(String lowerCase);
 }

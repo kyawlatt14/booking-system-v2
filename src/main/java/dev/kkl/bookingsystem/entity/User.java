@@ -25,12 +25,17 @@ public class User {
 
     private String fullName;
 
+    private String country;
+
     private boolean emailVerified;
 
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(Long userId) {
+    }
 
     public enum Role {
         USER, ADMIN

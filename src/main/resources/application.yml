@@ -2,6 +2,7 @@ spring:
   application:
     name: booking-system
   datasource:
+    initialization-mode : always
     url: jdbc:postgresql://localhost:5432/booking # PostgreSQL JDBC URL
     username: postgres              # Your PostgreSQL username
     password: kkl@14994              # Your PostgreSQL password
@@ -14,16 +15,14 @@ spring:
   sql:
     init:
       mode: always
+  #      schema-locations: classpath:schema.sql
+
   main:
     allow-circular-references: true
   data:
     redis:
       host: localhost
       port: 6379
-
-#jwt:
-#  secret: verysecretkey123456
-#  expiration: 86400000
 
 server:
   port: 8080

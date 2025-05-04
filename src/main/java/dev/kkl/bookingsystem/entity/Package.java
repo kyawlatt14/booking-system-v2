@@ -2,12 +2,14 @@ package dev.kkl.bookingsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "packages")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Package {

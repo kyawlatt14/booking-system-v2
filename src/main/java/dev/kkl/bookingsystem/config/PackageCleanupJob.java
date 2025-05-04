@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -15,9 +16,11 @@ public class PackageCleanupJob {
     @Autowired
     private UserPackageRepository userPackageRepository;
 
-    @Scheduled(cron = "0 5 * * * ?")
+    String ster = "2023-10-01T00:00:00";
+
+    @Scheduled(cron = "*/10 * * * * ?")
     public void cleanExpiredPackages() {
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         List<UserPackage> expired = userPackageRepository.findByExpiryDateBefore(now);
         for (UserPackage pkg : expired) {
             pkg.setRemainingCredits(0);
