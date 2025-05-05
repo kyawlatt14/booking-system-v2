@@ -1,0 +1,14 @@
+spring:
+
+  datasource:
+    initialization-mode : always
+    url: jdbc:postgresql://localhost:5432/booking # PostgreSQL JDBC URL
+    username: postgres              # Your PostgreSQL username
+    password: kkl@14994              # Your PostgreSQL password
+    driver-class-name: org.postgresql.Driver        # PostgreSQL Driver class
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
