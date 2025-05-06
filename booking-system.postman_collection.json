@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "00c09c85-930a-49ba-b56f-6f6533afff14",
+		"name": "booking-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14188895"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"kyawlatt17@mail.com\",\n    \"country\" : \"Myanmar\",\n    \"password\": \"123456\",\n    \"fullName\": \"Kyaw Kyaw Latt17\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"kyawlatt15@mail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "package",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE0QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc1NTM5LCJleHAiOjE3NDY0NjE5Mzl9.Ofou63ZRNynaPE3PH7vNNRMDXi4t8i1zZtKlXPQV__66F9p-7Eps4EapF2ClpMTrXHMmZv5lOIDstu5tnkdFag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"test1\",\n    \"description\": \"test1\",\n    \"country\": \"myanmar\",\n    \"totalCredits\": \"5\",\n    \"price\": \"20\",\n    \"validityDays\": \"5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/packages/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"packages",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "purchase(do it before book)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE2QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc3Nzc3LCJleHAiOjE3NDY0NjQxNzd9.pSPgkl9oK5uGuIEyMITNzp8MyeqpKc30lYlZ_jSY5DOWC9UXGBznFVqt_-T8KU6X1TUvNmG8Q7Qy7JvuXV-yxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"packageId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/packages/purchase",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"packages",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByCountry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE0QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc1NTM5LCJleHAiOjE3NDY0NjE5Mzl9.Ofou63ZRNynaPE3PH7vNNRMDXi4t8i1zZtKlXPQV__66F9p-7Eps4EapF2ClpMTrXHMmZv5lOIDstu5tnkdFag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/packages/country/myanmar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"packages",
+								"country",
+								"myanmar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE0QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc1NTM5LCJleHAiOjE3NDY0NjE5Mzl9.Ofou63ZRNynaPE3PH7vNNRMDXi4t8i1zZtKlXPQV__66F9p-7Eps4EapF2ClpMTrXHMmZv5lOIDstu5tnkdFag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/packages",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"packages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "booking",
+			"item": [
+				{
+					"name": "my",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHVzZXIuY29tIiwiaWF0IjoxNzQ2MzcwNzI5LCJleHAiOjE3NDY0NTcxMjl9.tzU0cFWIHg9FANgeGwORm4B7-gIH7l6xgj12jPpZ-XqejKcZqAY88zbTLgSmudZYOKz0HRuNKjuB_EOcUmMvpA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/bookings/my",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bookings",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE2QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc3Nzc3LCJleHAiOjE3NDY0NjQxNzd9.pSPgkl9oK5uGuIEyMITNzp8MyeqpKc30lYlZ_jSY5DOWC9UXGBznFVqt_-T8KU6X1TUvNmG8Q7Qy7JvuXV-yxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/bookings/book/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bookings",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-classSchedule",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE1QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc4MDcxLCJleHAiOjE3NDY0NjQ0NzF9.DbROXXeCLcy_39BBUWXa8EldrjfAo6eJnm3ZUaX4wDVm4A9MVsy-s6eL-Y7H_EaeLiMWVzxPJK3tEB8_0ALfxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"className\": \"Yoga Beginner\",\n    \"country\": \"myanmar\",\n    \"startTime\": \"2025-05-10T08:00:00\",\n    \"endTime\": \"2025-05-10T09:00:00\",\n    \"capacity\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/bookings/classSchedule/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bookings",
+								"classSchedule",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelBooking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJreWF3bGF0dDE1QG1haWwuY29tIiwiaWF0IjoxNzQ2Mzc4MDcxLCJleHAiOjE3NDY0NjQ0NzF9.DbROXXeCLcy_39BBUWXa8EldrjfAo6eJnm3ZUaX4wDVm4A9MVsy-s6eL-Y7H_EaeLiMWVzxPJK3tEB8_0ALfxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/bookings/cancel/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bookings",
+								"cancel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
